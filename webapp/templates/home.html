@@ -1,10 +1,81 @@
-{% extends 'base.html' %}{% block title %}Home Page{% endblock %}{% block content %}
-<head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='home.css')}}">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css')}}">
+    <link href="https://fonts.googleapis.com/css?
+    family=Alfa+Slab+One|Open+Snas" rel="stylesheet">
+    <script
+      src="https://kit.fontawesome.com/999ca2bb93.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://kit.fontawesome.com/68e1065d02.js" crossorigin="anonymous"></script>
 
-</head>
-
-{% endblock %}
-
-
-
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  </head>
+  <body>
+    <div class="image">
+      <div class="nav-bar">
+      <header>
+        <h1>Best<span>Prices</span></h1>
+        <nav>
+          <ul>
+            <li><a href='#'>Home</a></li>
+            <li><a href='#'>About</a></li>
+            <li><a href='#'>Contact US</a></li>
+          </ul>
+        </nav>
+      </header>
+      </div>
+      <div class="text-area">
+        <h2>Hello World!</h2>
+      </div>
+      <div class="search">
+        <form method='POST'>
+          <div class="form-box">
+          <input type="text" placeholder="search" class="search-txt">
+          <a class="search-btn" href="'#">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </a>
+          </button>
+          </div>
+  
+        </form>
+      </div>
+    </div>
+  </body>
+  
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %} {% if category ==
+    'error' %}
+    <div class="alert alert-danger alter-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% else %}
+    <div class="alert alert-success alter-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endif %} {% endfor %} {% endif %} {% endwith %}
+    <div class="container">{% block content %}{% endblock %}</div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='index.js')}}"
+    ></script>
+  </body>
+</html>
