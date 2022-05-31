@@ -1,25 +1,27 @@
 *{
     margin: 0;
-    height:100%;
+    height:auto;
     box-sizing: border-box;
 }
 body{
-    width:100%
+    margin-left: auto;
+    margin-right:auto;
+    width:100%;
+    padding-bottom:20px;
+    margin-bottom: 0;
 }
 
 .image{
     background-color:grey;
     background-image: url('/static/shopping.jpg');
-    height: 80%;
     background-position: center;
     background-repeat: no-repeat;
     background-size:cover;
     position: relative;
     background-blend-mode: multiply;
-    padding-bottom:800px;
+    padding-bottom: 1100px;
 
 }
-
 
 header{
     width: 100%;
@@ -71,58 +73,84 @@ a:hover{
 
 }
 
-
-.search{
+.content{
+    min-height: auto;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    margin: auto;
+    margin-top: -30%;
+}
+.content h2{
     position: absolute;
-    top: 50%;
-    left: 50%;
-    height:50px;
-    transform: translate(-50%,-50%);
-    border-radius:40px;
-    padding: 10px;
-    background: #2f3640;
+    margin: 0 auto;
+    color: white;
+    justify-content: center;
+    font-size: 50px;
+    padding-bottom: 500px;
 
 
 }
+.content p{
+    position: absolute;
+    margin: 0 auto;
+    color: white;
+    font-size: 20px;
+    padding-bottom:300px;
+    
+}
+.search{
+    margin: 0 auto;
+    position: absolute;
+    height:50px;
+    border-radius:40px;
+    background: white;
+    padding: 1px;
+    
+}
 
 .search-btn{
+    margin: 0 auto;
     color: #39ca74;
     float: right;
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     border-radius:50%;
-    background: #2f3640;
     display:flex;
     justify-content: center;
     align-items: center;
+    
 
 }
 
 .search-txt{
+    margin: 0 auto;
     border:none;
     background:none;
     outline:none;
     float:left;
     padding:0;
-    color:white;
+    color:black;
     font-size:16px;
     transition: 0.4s;
     line-height: 40px;
-    width: 240px;
-
-
-
-
+    width: 340px;
 
 
 }
 
-.text-area{
-    top: 20%;
-    right: 42%;
-
-    position:absolute;
-    display: flex;
+footer{
+    color:black;
+    height: 160px;
+    padding-top: 32%;
     justify-content: center;
+    align-items: center;
+    display:flex;
 
 }
+
+footer.h2{
+    color: #39ca74
+}
+

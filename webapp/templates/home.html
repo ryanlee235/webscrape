@@ -21,8 +21,7 @@
 
     <title>{% block title %}{% endblock %}</title>
   </head>
-  </head>
-  <body>
+
     <div class="image">
       <div class="nav-bar">
       <header>
@@ -36,23 +35,32 @@
         </nav>
       </header>
       </div>
-      <div class="text-area">
-        <h2>Hello World!</h2>
-      </div>
-      <div class="search">
-        <form method='POST'>
-          <div class="form-box">
-          <input type="text" placeholder="search" class="search-txt">
-          <a class="search-btn" href="'#">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </a>
-          </button>
-          </div>
-  
-        </form>
       </div>
     </div>
-  </body>
+    <div class="content">
+      <h2>ispus fdsalkjf</h2>
+      <p>hello</p>
+
+    <div class="search">
+      <form method='POST'>
+        <div class="form-box">
+        <input type="text" placeholder="search" class="search-txt">
+        <a class="search-btn" href="'#">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </a>
+        </button>
+        </div>
+
+      </form>
+    </div>
+
+   </div>
+      
+
+<footer>
+  <h2>Hello</h2>
+    <p>About Us<br>Contact Us</p>
+</footer>
   
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
     messages %} {% for category, message in messages %} {% if category ==
