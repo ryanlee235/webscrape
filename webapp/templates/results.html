@@ -1,4 +1,8 @@
-{% extends "base.html" %}
+{% extends "base.html" %}{% block title %}Results{% endblock%}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='base.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='results.css')}}">
+{% endblock %}
 {% block content %}
 <div class="gallery">
     <div class="content">

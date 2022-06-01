@@ -4,8 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 from time import sleep
 import re
-
-search_term = input('enter product: ')
+search_term = input("enter something")
 PATH ="C:\Program Files (x86)\chromedriver.exe"
 options = webdriver.ChromeOptions()
 options.add_argument("--log-level=5")
