@@ -1,31 +1,8 @@
-*{
-    margin: 0;
-    height:auto;
-    box-sizing: border-box;
-}
-body{
-    margin-left: auto;
-    margin-right:auto;
-    width:100%;
-    padding-bottom:20px;
-    margin-bottom: 0;
-}
-
-.image{
-    background-color:grey;
-    background-image: url('/static/shopping.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size:cover;
-    position: relative;
-    background-blend-mode: multiply;
-    padding-bottom: 1100px;
-
-}
 
 header{
     width: 100%;
     height: 70px;
+    background-color:rgb(46, 45, 45);
 
 
 }
@@ -37,7 +14,7 @@ h1{
     margin-left: 2%;
     margin-top: 10px;
     font-family: 'Alfa Slab One', cursive;
-    color: #39ca74;
+    color: #f1446f;
 
 
 }
@@ -68,89 +45,8 @@ a{
 }
 
 a:hover{
-    color: #39ca74;
+    color: #f1446f;
     transition: 0.5s;
 
-}
-
-.content{
-    min-height: auto;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    display: flex;
-    margin: auto;
-    margin-top: -30%;
-}
-.content h2{
-    position: absolute;
-    margin: 0 auto;
-    color: white;
-    justify-content: center;
-    font-size: 50px;
-    padding-bottom: 500px;
-
-
-}
-.content p{
-    position: absolute;
-    margin: 0 auto;
-    color: white;
-    font-size: 20px;
-    padding-bottom:300px;
-    
-}
-.search{
-    margin: 0 auto;
-    position: absolute;
-    height:50px;
-    border-radius:40px;
-    background: white;
-    padding: 1px;
-    
-}
-
-.search-btn{
-    margin: 0 auto;
-    color: #39ca74;
-    float: right;
-    width: 60px;
-    height: 60px;
-    border-radius:50%;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    
-
-}
-
-.search-txt{
-    margin: 0 auto;
-    border:none;
-    background:none;
-    outline:none;
-    float:left;
-    padding:0;
-    color:black;
-    font-size:16px;
-    transition: 0.4s;
-    line-height: 40px;
-    width: 340px;
-
-
-}
-
-footer{
-    color:black;
-    height: 160px;
-    padding-top: 32%;
-    justify-content: center;
-    align-items: center;
-    display:flex;
-
-}
-
-footer.h2{
-    color: #39ca74
 }
 
