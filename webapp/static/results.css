@@ -44,7 +44,7 @@ h3{
 
 }
 
-img{
+image{
     width:200px;
     height:200px;
     text-align: center;
@@ -63,6 +63,25 @@ h6{
     text-align: center;
     color: #222f3e;
     margin:0;
+
+}
+button{
+    text-align: center;
+    font-size: 24px;
+    color:#fff;
+    width: 100%;
+    padding:15px;
+    border:0;
+    outline:none;
+    cursor: pointer;
+    margin-top: 5px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+
+}
+
+.buy{
+    background: #f1446f;
 
 }
 

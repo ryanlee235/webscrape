@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 from time import sleep
 import re
-search_term = input("enter something")
+search_term = input("enter something: ")
 PATH ="C:\Program Files (x86)\chromedriver.exe"
 options = webdriver.ChromeOptions()
 options.add_argument("--log-level=5")
@@ -41,7 +41,6 @@ def amazon():
     
     for item in sections:
         
-        
         parent = item.parent
 
         if parent.name != 'a':
@@ -53,13 +52,22 @@ def amazon():
             
         try:
             item_name = parent_name.find(class_='a-size-medium a-color-base a-text-normal').text
-            amazon_products.append(item_name)
-            price = parent_name.find(class_='a-price-whole').text
-            price.join("price:")
-            amazon_products.append(price)
             
+            s = parent_name.find(class_='s-label-popover-default')
+            if s:
+                pass
+            else:
+                item_name = parent_name.find(class_='a-size-medium a-color-base a-text-normal').text  
+                amazon_products.append(item_name)
+                price = parent_name.find(class_='a-price-whole').text
+                price.join("price:")
+                amazon_products.append(price)
+                
         except:
             pass
+
+    for image in soup.find_all('img'):
+        print(image['src'])
 
        
 def microcenter():
@@ -92,20 +100,20 @@ def microcenter():
         microcenter_products.append("https://www.microcenter.com" + link.get('href'))
 
 
-def items():
-    amazon_product_new = [i for n, i in enumerate(amazon_products) if i not in amazon_products[:n]]
-    print("AMAZON")
-    print("-----------------")
-    for i in amazon_product_new:
-        print(i, sep="", end="\n")
-    print("---------------------")
-    print("MICROCENTER")
-    for i in microcenter_products[:9]:
-        print(i)
+# def items():
+#     amazon_product_new = [i for n, i in enumerate(amazon_products) if i not in amazon_products[:n]]
+#     print("AMAZON")
+#     print("-----------------")
+#     for i in amazon_product_new:
+#         print(i, sep="", end="\n")
+#     print("---------------------")
+#     print("MICROCENTER")
+#     for i in microcenter_products[:9]:
+#         print(i)
 
         
      
 if __name__ == '__main__':
     amazon()
-    microcenter()
-    items()
+    #microcenter()
+    #items()
