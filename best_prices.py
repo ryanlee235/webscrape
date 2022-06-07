@@ -10,7 +10,7 @@ options = webdriver.ChromeOptions()
 options.add_argument("--log-level=5")
 options.add_argument('--disable-dev-shm-usage')
 options.add_argument('--headless')
-driver = webdriver.Chrome(PATH,options=options)
+driver = webdriver.Chrome(PATH)
 
 headers = {
     'user-agent': 'Mozilla/5.0 (X11; Linux x86_64)',
@@ -51,8 +51,6 @@ def amazon():
         parent_name = item.find_parent(class_='sg-row')
             
         try:
-            item_name = parent_name.find(class_='a-size-medium a-color-base a-text-normal').text
-            
             s = parent_name.find(class_='s-label-popover-default')
             if s:
                 pass
@@ -65,17 +63,13 @@ def amazon():
                 
         except:
             pass
-
-    for image in soup.find_all('img'):
-        print(image['src'])
-
        
 def microcenter():
     driver.get('https://www.microcenter.com/')
     nav_Bar = driver.find_element_by_id('search-query')
     nav_Bar.send_keys(search_term)
     nav_Bar.send_keys(Keys.RETURN)
-
+    sleep(3)
     search_tab = driver.find_element_by_xpath('//*[@id="pnlMyStoreOnly"]/div/ul/li[2]/a')
     search_tab.click()
     sleep(3)
@@ -100,6 +94,44 @@ def microcenter():
         microcenter_products.append("https://www.microcenter.com" + link.get('href'))
 
 
+def best_buy():
+    driver.get("https://www.bestbuy.com/")
+    search_bar = driver.find_element_by_xpath('//*[@id="gh-search-input"]')
+    search_bar.send_keys(search_term)
+    search_bar.send_keys(Keys.RETURN)
+
+    r = requests.get(driver.current_url,headers=headers)
+    soup = BeautifulSoup(r.content,"html.parser")
+
+    rows = soup.find(class_='sku-item-list')
+    
+    for item in rows:
+        parent = item.parent
+
+        if parent.name != 'a':
+            continue
+
+        link = parent['href']
+        print(link)
+
+        try:
+            information_block = item.find(class_='sku-title').text
+            price_block = item.find(class_='priceView-hero-price priceView-customer-price').text.split('$')[-1]
+          
+
+
+        except:
+            pass
+        
+
+        
+        
+
+
+best_buy()
+
+
+
 # def items():
 #     amazon_product_new = [i for n, i in enumerate(amazon_products) if i not in amazon_products[:n]]
 #     print("AMAZON")
@@ -108,12 +140,13 @@ def microcenter():
 #         print(i, sep="", end="\n")
 #     print("---------------------")
 #     print("MICROCENTER")
-#     for i in microcenter_products[:9]:
-#         print(i)
+    
+#     print(microcenter_products[:9])
 
         
      
-if __name__ == '__main__':
-    amazon()
-    #microcenter()
-    #items()
+# if __name__ == '__main__':
+#     amazon()
+#     microcenter()
+#     items()
+

@@ -41,6 +41,8 @@ def home():
 
         else:
             amazon()
+            microcenter()
+            best_buy()
             return redirect(url_for('views.results'))
 
     return render_template("home.html")
@@ -72,18 +74,68 @@ def amazon():
             parent_name = item.find_parent(class_='sg-row')
 
             try:
-                sponsored = parent_name.find(class_='s-label-popover-default')
-                if sponsored:
-                    pass
-                elif not sponsored:
-                    item_name = parent_name.find(class_='a-size-medium a-color-base a-text-normal').text
-                    session['item-name'] = item_name
-                    price = parent_name.find(class_='a-price-whole').text
-                    session['price'] = price
+    
+                item_name = parent_name.find(class_='a-size-medium a-color-base a-text-normal').text
+                session['item-name'] = item_name
+                price = parent_name.find(class_='a-price-whole').text
+                session['price'] = price
             except:
                 pass
 
         for images in soup.find_all("img"):
             i = images['src']
             session['link-image'] = i
+
+@views.route("/microcenter")
+def microcenter():
+    if "search" in session:
+        search = session['search']
+        driver.get('https://www.microcenter.com/')
+        nav_Bar = driver.find_element_by_id('search-query')
+        nav_Bar.send_keys(search)
+        nav_Bar.send_keys(Keys.RETURN)
+
+        search_tab = driver.find_element_by_xpath('//*[@id="pnlMyStoreOnly"]/div/ul/li[2]/a')
+        search_tab.click()
+        sleep(3)
+
+        r = requests.get(driver.current_url,headers=headers)
+        soup = BeautifulSoup(r.content,'html.parser')
+        rows = soup.find_all(class_='product_wrapper')
+        for i in rows:
+                    
+            try:
+                product_name = i.find(class_="normal").text
+                session['microcenter-item'] = product_name
+                price = i.find(itemprop="price").text
+                session['microcenter-price'] = price
+            except:
+                pass
+            
+            link = i.find('a',class_='image')
+@views.route('/bestbuy')
+def best_buy():
+    if "search" in session:
+        search = session['search']
+    driver.get("https://www.bestbuy.com/")
+    search_bar = driver.find_element_by_xpath('//*[@id="gh-search-input"]')
+    search_bar.send_keys(search)
+    search_bar.send_keys(Keys.RETURN)
+
+    r = requests.get(driver.current_url,headers=headers)
+    soup = BeautifulSoup(r.content,"html.parser")
+
+    rows = soup.find(class_='sku-item-list')
+    
+    for item in rows:
+
+        try:
+
+            information_block = item.find(class_='sku-title').text
+            session['best-buy-item-name'] = information_block
+            price_block = item.find(class_='priceView-hero-price priceView-customer-price').text.split('$')[-1]
+            session['best-buy-price'] = price_block
+
+        except:
+            pass
 

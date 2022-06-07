@@ -8,27 +8,22 @@
     
     <div class="content">
         <h3>Amazon</h3>
-        <img src="{{session['image-link']}}">
         <h6>{{session['item-name']}}</h6>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
         <h6>${{session['price']}}</h6>
         <button type="submit" class="buy">Buy Now</button>
     </div>
 
     <div class="content">
         <h3>Microcenter</h3>
-        <img src="https://m.media-amazon.com/images/I/71bhWgQK-cL._AC_UY218_.jpg">
-        <h3>AirPods</h3>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-        <h6>$100.00</h6>
+        <h6>{{session['microcenter-item']}}</h6>
+        
+        <h6>{{session['microcenter-price']}}</h6>
         <button type="submit" class="buy">Buy Now</button>
     </div>
     <div class="content">
-        <h3>Microcenter</h3>
-        <img src="https://m.media-amazon.com/images/I/71bhWgQK-cL._AC_UY218_.jpg">
-        <h3>AirPods</h3>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-        <h6>$100.00</h6>
+        <h3>BestBuy</h3>
+        <h6>{{session['best-buy-item-name']}}</h6>
+        <h6>{{session['best-buy-price']}}</h6>
         <button type="submit" class="buy">Buy Now</button>
     </div>
 
