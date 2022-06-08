@@ -25,9 +25,7 @@ headers = {
     'accept-langauge': 'en-US,en;q=0.9'
 
 }
-
-
-
+amazon_link = []
 
 views = Blueprint('views',__name__)
 
@@ -74,7 +72,11 @@ def amazon():
             parent_name = item.find_parent(class_='sg-row')
 
             try:
-    
+                link_parent = parent_name.find(class_='a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal')
+                if link_parent == None:
+                    continue
+                link_name = "https://www.amazon.com/"+ link_parent.get("href")
+                session['link'] = link_name
                 item_name = parent_name.find(class_='a-size-medium a-color-base a-text-normal').text
                 session['item-name'] = item_name
                 price = parent_name.find(class_='a-price-whole').text
@@ -139,3 +141,8 @@ def best_buy():
         except:
             pass
 
+
+@views.route("/amazon-links")
+def amazon_links():
+    pass
+    

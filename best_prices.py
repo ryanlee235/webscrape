@@ -40,29 +40,23 @@ def amazon():
     sections = soup.find_all(class_='a-section')
     
     for item in sections:
-        
-        parent = item.parent
 
-        if parent.name != 'a':
-            continue
-
-        link = parent['href']
-        
         parent_name = item.find_parent(class_='sg-row')
-            
         try:
-            s = parent_name.find(class_='s-label-popover-default')
-            if s:
-                pass
-            else:
-                item_name = parent_name.find(class_='a-size-medium a-color-base a-text-normal').text  
-                amazon_products.append(item_name)
-                price = parent_name.find(class_='a-price-whole').text
-                price.join("price:")
-                amazon_products.append(price)
-                
+            
+            link_parent = parent_name.find(class_='a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal')
+            if link_parent == None:
+                continue
+            link_name = link_parent.get("href")
+            print("https://www.amazon.com/" + link_name)
+
+            item_name = parent_name.find(class_='a-size-medium a-color-base a-text-normal').text  
+            price = parent_name.find(class_='a-price-whole').text
+            price.join("price:")
         except:
             pass
+
+
        
 def microcenter():
     driver.get('https://www.microcenter.com/')
@@ -128,25 +122,25 @@ def best_buy():
         
 
 
-best_buy()
 
 
 
-# def items():
-#     amazon_product_new = [i for n, i in enumerate(amazon_products) if i not in amazon_products[:n]]
-#     print("AMAZON")
-#     print("-----------------")
-#     for i in amazon_product_new:
-#         print(i, sep="", end="\n")
-#     print("---------------------")
-#     print("MICROCENTER")
+
+def items():
+    amazon_product_new = [i for n, i in enumerate(amazon_products) if i not in amazon_products[:n]]
+    print("AMAZON")
+    print("-----------------")
+    for i in amazon_product_new:
+        print(i, sep="", end="\n")
+    print("---------------------")
+    print("MICROCENTER")
     
-#     print(microcenter_products[:9])
+    print(microcenter_products[:9])
 
         
      
-# if __name__ == '__main__':
-#     amazon()
+if __name__ == '__main__':
+    amazon()
 #     microcenter()
 #     items()
 
