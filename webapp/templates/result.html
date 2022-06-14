@@ -7,24 +7,22 @@
 <div class="gallery">
     
     <div class="content">
-        <h3>Amazon</h3>
-        <h6>{{session['item-name']}}</h6>
-        <h6>${{session['price']}}</h6>
-        <button type="submit" class="buy">Buy Now</button>
+        <form method="POST" action="{{session['link']}}">
+            <h3>Amazon</h3>
+            <h6>{{session['item-name']}}</h6>
+            <h6>${{session['price']}}</h6>
+            <button type="submit" class="buy">Buy Now</button>
+        </form>
     </div>
 
     <div class="content">
-        <h3>Microcenter</h3>
-        <h6>{{session['microcenter-item']}}</h6>
-        
-        <h6>{{session['microcenter-price']}}</h6>
-        <button type="submit" class="buy">Buy Now</button>
-    </div>
-    <div class="content">
-        <h3>BestBuy</h3>
-        <h6>{{session['best-buy-item-name']}}</h6>
-        <h6>{{session['best-buy-price']}}</h6>
-        <button type="submit" class="buy">Buy Now</button>
+        <form method="POST" action="{{session['link-microcenter']}}">
+            <h3>Microcenter</h3>
+            <h6>{{session['microcenter-item']}}</h6>
+            
+            <h6>{{session['microcenter-price']}}</h6>
+            <button type="submit" class="buy">Buy Now</button>
+        </form>
     </div>
 
 </div>

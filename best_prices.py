@@ -1,3 +1,4 @@
+from email import header
 import requests
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -33,30 +34,26 @@ def amazon():
     nav_bar = driver.find_element_by_id('twotabsearchtextbox')
     nav_bar.send_keys(search_term)
     nav_bar.send_keys(Keys.RETURN)
-    
     r = requests.get(driver.current_url,headers=headers)
-    print(r)
-    soup = BeautifulSoup(r.content, 'lxml')
-    sections = soup.find_all(class_='a-section')
-    
-    for item in sections:
+    soup = BeautifulSoup(r.content, 'html.parser')
+    section = soup.find_all(class_="a-section")
 
-        parent_name = item.find_parent(class_='sg-row')
+    for i in section:
         try:
-            
-            link_parent = parent_name.find(class_='a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal')
-            if link_parent == None:
-                continue
-            link_name = link_parent.get("href")
-            print("https://www.amazon.com/" + link_name)
-
-            item_name = parent_name.find(class_='a-size-medium a-color-base a-text-normal').text  
-            price = parent_name.find(class_='a-price-whole').text
-            price.join("price:")
+            name = i.find(class_='a-size-medium a-color-base a-text-normal').text
+            price = i.find(class_="a-price-whole").text
+            link = i.find(class_='a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal')
         except:
             pass
+ 
+    return name, price
+     
 
-
+    #price = driver.find_element_by_css_selector(".widgetId\=search-results_1 > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a:nth-child(1) > span:nth-child(1) > span:nth-child(2) > span:nth-child(2)").text
+    #link = driver.find_element_by_partial_link_text("/").text
+    
+    #print(price)
+    #print(link)
        
 def microcenter():
     driver.get('https://www.microcenter.com/')
@@ -69,78 +66,94 @@ def microcenter():
     sleep(3)
     r = requests.get(driver.current_url,headers=headers)
     soup = BeautifulSoup(r.content,'html.parser')
-    rows = soup.find_all(class_='product_wrapper')
-    for i in rows:
-        
-
-        product_name = i.find(class_="normal").text
-        microcenter_products.append(product_name)
-        product_name.join("item:")
-        try:
-
-            price = i.find(itemprop="price").text
-            price.join("price:")
-            microcenter_products.append(price)
-        except:
-            pass
-        
-        link = i.find('a',class_='image')
-        microcenter_products.append("https://www.microcenter.com" + link.get('href'))
+    product_name = soup.find(class_="normal").text   
+    price = soup.find(itemprop="price").text
+    link_class = soup.find('a',class_='image')
+    link = link_class.get("href")
+    print(product_name)
+    print(price)
+    print(link)
+    
 
 
 def best_buy():
-    driver.get("https://www.bestbuy.com/")
-    search_bar = driver.find_element_by_xpath('//*[@id="gh-search-input"]')
-    search_bar.send_keys(search_term)
-    search_bar.send_keys(Keys.RETURN)
 
-    r = requests.get(driver.current_url,headers=headers)
+    url = 'https://www.bestbuy.com/site/searchpage.jsp?st={search_term}'
+    r = requests.get(url, headers=headers)
     soup = BeautifulSoup(r.content,"html.parser")
-
-    rows = soup.find(class_='sku-item-list')
     
-    for item in rows:
-        parent = item.parent
 
-        if parent.name != 'a':
-            continue
 
-        link = parent['href']
-        print(link)
+    
 
-        try:
-            information_block = item.find(class_='sku-title').text
-            price_block = item.find(class_='priceView-hero-price priceView-customer-price').text.split('$')[-1]
+      
+    information_block = soup.find(class_='sku-title').text
+    
+    # price_block = soup.find(class_='priceView-hero-price priceView-customer-price').text.split('$')[-1]
           
 
-
-        except:
-            pass
         
 
-        
-        
+def new_egg():
+    driver.get("https://www.newegg.com/")
+    search_bar = driver.find_element_by_css_selector('.header2021-search-box > input:nth-child(1)')
+    search_bar.send_keys(search_term)
+    search_bar.send_keys(Keys.RETURN)
+    sleep(5)
 
+    item_click = driver.find_element_by_class_name("item-img")
+    item_click.click()
+    #name = driver.find_element_by_class_name('product-title').text
 
-
-
-
-
-def items():
-    amazon_product_new = [i for n, i in enumerate(amazon_products) if i not in amazon_products[:n]]
-    print("AMAZON")
-    print("-----------------")
-    for i in amazon_product_new:
-        print(i, sep="", end="\n")
-    print("---------------------")
-    print("MICROCENTER")
     
-    print(microcenter_products[:9])
+    
+    
+    
+
+
+
+
+
+
+
+# def items():
+#     amazon_product_new = [i for n, i in enumerate(amazon_products) if i not in amazon_products[:n]]
+#     print("AMAZON")
+#     print("-----------------")
+#     for i in amazon_product_new:
+#         print(i, sep="", end="\n")
+#     print("---------------------")
+#     print("MICROCENTER")
+    
+#     print(microcenter_products[:9])
 
         
      
 if __name__ == '__main__':
-    amazon()
-#     microcenter()
+    new_egg()
 #     items()
 
+# def best_buy():
+#     if "search" in session:
+#         search = session['search']
+#     driver.get("https://www.bestbuy.com/")
+#     search_bar = driver.find_element_by_xpath('//*[@id="gh-search-input"]')
+#     search_bar.send_keys(search)
+#     search_bar.send_keys(Keys.RETURN)
+
+#     r = requests.get(driver.current_url,headers=headers)
+#     soup = BeautifulSoup(r.content,"html.parser")
+
+#     rows = soup.find(class_='sku-item-list')
+    
+#     for item in rows:
+
+#         try:
+
+#             information_block = item.find(class_='sku-title').text
+#             session['best-buy-item-name'] = information_block
+#             price_block = item.find(class_='priceView-hero-price priceView-customer-price').text.split('$')[-1]
+#             session['best-buy-price'] = price_block
+
+#         except:
+#             pass
